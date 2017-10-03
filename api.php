@@ -10,8 +10,7 @@ require_once 'vendor/autoload.php'; //include mongodb la classe
 require 'JWT_ENCODE_DECODE.php';
 require 'MONGO_MANAGER.php';
 require 'SHORTER.php';
-//$manager = new MongoDB\Driver\Manager("mongodb://localhost:27017"); //apre una connessione a mongo
-//$bulk = new MongoDB\Driver\BulkWrite(); //apre un writer in mongo
+
 $manager = new MongoManager();
 $manager->getConnection('localhost', '27017');
 
