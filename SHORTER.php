@@ -19,8 +19,9 @@ class Shorter extends MongoManager
         }
     }
 
-    public function short($url)
+    public function short($address,$port)
     {
+        $this->getConnection($address,$port);
         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"; //set di caratteri disponibili alla generazione di un hash
         do {
             $newHash = substr(str_shuffle($chars), 0, 6); //crea un nuovo hash random di 6 caratteri
