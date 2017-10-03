@@ -9,13 +9,12 @@
 
 	
 	require_once 'vendor/autoload.php'; //INCLUDE CLASSE MONGODB
-	use \Firebase\JWT\JWT; //INCLUDE CLASSE JWT
     require 'JWT_ENCODE_DECODE.php';
-	
-	$manager = new MongoDB\Driver\Manager("mongodb://localhost:27017"); //INIZIALIZZA CONNESSIONE MONGODB
+	require 'MONGO_MANAGER.php';
+	$manager=new MongoManager();
+	$manager->getConnection('localhost','27017');
 
 	$secret_key = "ThisIsTheSecretKey12ForJWT"; //key segreta per codifica e decodifica token
-
     $postdata = file_get_contents("php://input"); //get json dall'app
  
 	$tokenmanager = new JwtAuth;
@@ -26,18 +25,13 @@
     	$password = $request['password']; //prende password passata dall'app <--- implementare https
     	$password = crypt($password,'$2a$09$trythissecretkeyifyouwanttogetthepassword$'); // crypta password
     	$filter = ['username' => $username, 'password'=>$password]; //filtro per la query mongodb
-    	$query = new MongoDB\Driver\Query($filter);  //definisce la query col filtro
-    	$result = $manager->executeQuery("musho.user", $query); //esegue la query sulla collection user del db musho
 
-    	$user = current($result->toArray()); //risultato della query castato in array 
-    	if(!empty($user)){ //se non è vuoto
-    		    $email = $user->email; //prendo email dall'utente ottenuto dal db
-                //AGGIUNGERE CLASS
-
-				$token=$tokenmanager->encode($email,$username,$user->id_user);
+    	$user = $manager->getDocument('musho.user',$filter);
+		if(!empty($user)){ //se non è vuoto
+				$email = $user[0]->email;
+				$id_user = $user[0]->id;
+				$token=$tokenmanager->encode($email,$username,$id_user);
 				echo $token;
-// 		    	$token = JWT::encode($payload, $secret_key); //genera token contenente il payload e cryptandolo con la key definita prima
-//		    	echo $token; //stampa il token
     	}
     	else echo "error"; //altrimenti errore
     	
