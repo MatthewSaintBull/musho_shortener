@@ -30,7 +30,6 @@ Class MongoManager {
         $result = $this->manager->executeQuery($db,$query); //esegue la query sulla collection user del db musho
         return $result;
     }
-//creare funzione controllo se document pieno o vuoto
     public function getDocument($db,$filter){
         $document = $this->select($db,$filter)->toArray();
         //aggiungere return false se non ci sono elementi
@@ -40,7 +39,7 @@ Class MongoManager {
     private function insert($db,$params){
         try{
             $this->bulk->insert($params);
-            $this->manager->executeBulkWrite($db,$bulk);
+            $this->manager->executeBulkWrite($db,$this->bulk);
             return true;
         }catch(Exception $e){
             return false;
