@@ -33,7 +33,7 @@ If you want to use it, then you need to move to the directory of the project and
 # Contact Me
 
 **email** 
-###### [email me](m.santoro1997@gmail.com)
+###### m.santoro1997@gmail.com
 
 **facebook**
 ##### [my private account](https://www.facebook.com/CPTSHERL)   
