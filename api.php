@@ -6,7 +6,6 @@
 */
 header('Access-Control-Allow-Origin: *');
 
-require_once 'vendor/autoload.php'; //include mongodb la classe
 require 'JWT_ENCODE_DECODE.php';
 require 'MONGO_MANAGER.php';
 require 'SHORTER.php';

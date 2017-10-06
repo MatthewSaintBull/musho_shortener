@@ -30,3 +30,4 @@ class Shorter extends MongoManager
     }
 }
 
+?>

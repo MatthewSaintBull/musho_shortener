@@ -61,9 +61,11 @@ Class MongoManager
     private function delete($db, $params)
     {
         try {
+
             $this->bulk->delete([$params]);
-            $result = $this->manager->executeBulkWrite($db, $this->bulk);
+            $this->manager->executeBulkWrite($db, $this->bulk);
             return true;
+
         } catch (Exception $e) {
             return false;
         }
@@ -71,8 +73,10 @@ Class MongoManager
 
     public function deleteDocument($db, $params)
     {
-        return $this->delete($db, $params);
+        echo $this->delete($db, $params);
     }
 
 
 }
+
+?>
